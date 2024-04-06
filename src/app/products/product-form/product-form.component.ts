@@ -78,5 +78,9 @@ export class ProductFormComponent {
       error: (err) => console.log(err)
     });
   }
+  //return to product details
+  return(){
+    window.location.reload();
+  }
 }
 

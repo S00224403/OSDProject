@@ -65,4 +65,7 @@ export class CategoryFormComponent {
       error: (err) => console.log(err)
     });
   }
+  return(){
+    window.location.reload()
+  }
 }

@@ -227,5 +227,9 @@ createProductFormGroup(product: any): FormGroup {
       error: (err) => console.log(err)
     });
   }
+  //return to order page
+  return(){
+    window.location.reload();
+  }
 }
 

@@ -42,9 +42,8 @@
                     
                     <mat-error *ngIf="categoryForm.get('categoryImage')?.hasError('maxlength')">Image must be a maximum of <strong>500</strong> characters long</mat-error>
                 </mat-form-field>
-
-                <a *ngIf="!category" mat-raised-button color="warn" href="/categories">Cancel<mat-icon>close</mat-icon></a>
-                <a *ngIf="category" mat-raised-button color="warn" href="/categories/{{category._id}}">Return<mat-icon>navigate_before</mat-icon></a>
+                <a *ngIf="!category" mat-raised-button color="warn" routerLink="../">Cancel<mat-icon>close</mat-icon></a>
+                <a *ngIf="category" mat-raised-button color="warn" (click)="return()">Return<mat-icon>navigate_before</mat-icon></a>
                 <button mat-raised-button type="submit" color="primary" [disabled]="categoryForm.invalid">Submit<mat-icon>check</mat-icon></button>
             </form> 
         </mat-card-content>

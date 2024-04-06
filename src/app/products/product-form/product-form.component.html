@@ -93,8 +93,8 @@
 
                 <mat-error *ngIf="!productForm.value.category">Category is <strong>required</strong></mat-error>
             </mat-form-field>
-            <a *ngIf="!product" mat-raised-button color="warn" href="/products">Cancel<mat-icon>close</mat-icon></a>
-            <a *ngIf="product" mat-raised-button color="warn" href="/products/{{product._id}}">Return<mat-icon>navigate_before</mat-icon></a>
+            <a *ngIf="!product" mat-raised-button color="warn" routerLink="../">Cancel<mat-icon>close</mat-icon></a>
+            <a *ngIf="product" mat-raised-button color="warn" (click)="return()">Return<mat-icon>navigate_before</mat-icon></a>
             <button mat-raised-button type="submit" color="primary" [disabled]="productForm.invalid">Submit<mat-icon>check</mat-icon></button>
         </form>
     </mat-card-content>

@@ -142,13 +142,13 @@
     
             <div class="control-buttons">
                 <ng-container *ngIf="(auth.user$ | async);else notLoggedIn">
-                    <a *ngIf="(!order)" mat-raised-button color="warn" href="/orders">Cancel<mat-icon>close</mat-icon></a>
+                    <a *ngIf="(!order)" mat-raised-button color="warn" routerLink="../">Cancel<mat-icon>close</mat-icon></a>
     
                     <a *ngIf="order" mat-raised-button color="warn"
-                        href="/orders/{{order._id}}">Return<mat-icon>navigate_before</mat-icon></a>
+                        (click)="return()">Return<mat-icon>navigate_before</mat-icon></a>
                 </ng-container>
                 <ng-template #notLoggedIn>
-                    <a mat-raised-button color="warn" href="/">Cancel<mat-icon>close</mat-icon></a>
+                    <a mat-raised-button color="warn" routerLink="/">Cancel<mat-icon>close</mat-icon></a>
                 </ng-template>
                 <button mat-raised-button type="submit" color="primary"
                     [disabled]="orderForm.invalid">Submit<mat-icon>check</mat-icon></button>
