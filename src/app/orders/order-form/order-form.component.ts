@@ -210,7 +210,7 @@ createProductFormGroup(product: any): FormGroup {
     console.log("adding new order" + JSON.stringify(newOrder));
     this.orderService.postOrder(newOrder).subscribe({
       next: order => {
-        this.router.navigateByUrl('/orders/' + order._id);
+        this.router.navigate(['/orders/' + order._id]);
       },
       error: (err) => console.log(err)
     });
@@ -221,7 +221,7 @@ createProductFormGroup(product: any): FormGroup {
     console.log("updating order" + JSON.stringify(order));
     this.orderService.updateOrder(id, order).subscribe({
       next: order => {
-        this.router.navigateByUrl('/orders/' + order._id);
+        this.router.navigate(['/orders/' + order._id]);
         document.location.reload();
       },
       error: (err) => console.log(err)

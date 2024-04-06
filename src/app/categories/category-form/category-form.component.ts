@@ -59,7 +59,7 @@ export class CategoryFormComponent {
     console.log("updating contact" + JSON.stringify(category));
     this.categoryService.updateCategory(id, category).subscribe({
       next: category => {
-        this.router.navigateByUrl('/categories/' + category._id);
+        this.router.navigate(['/categories/' + category._id]);
         
       },
       error: (err) => console.log(err)

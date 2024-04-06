@@ -72,7 +72,7 @@ export class ProductFormComponent {
     console.log("updating contact" + JSON.stringify(product));
     this.productService.updateProduct(id, product).subscribe({
       next: product => {
-        this.router.navigateByUrl('/products/' + product._id);
+        this.router.navigate(['/products/' + product._id]);
         
       },
       error: (err) => console.log(err)
