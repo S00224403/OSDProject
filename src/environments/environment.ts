@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    apiUri: 'http://localhost:3000/api/v1',
+    apiUri: 'https://osdprojectapi.onrender.com/api/v1',
     auth0:
     {
       domain: 'dev-zjuu1sacbv0j7hv1.us.auth0.com',
