@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <ng-container *ngIf="isHandset$ | async; else regularMenu">
+    <button mat-icon-button (click)="toggleMenu()" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLink="categories" *ngIf="role == 'admin'">Category</a>
+      <a mat-menu-item routerLink="products">Products</a>
+      <a mat-menu-item routerLink="orders" *ngIf="role == 'admin'">Orders</a>
+    </mat-menu>
+    <a mat-flat-button color="primary" routerLink="">
+      <h1>Assignment Part 2</h1>
+    </a>
+  </ng-container>
+
+  <ng-template #regularMenu>
+    <a mat-flat-button color="primary" routerLink="">
+      <h1>Assignment Part 2</h1>
+    </a>
+    <div class="menu-items">
+      <a mat-flat-button color="primary" routerLink="categories" *ngIf="role == 'admin'">Category</a>
+      <a mat-flat-button color="primary" routerLink="products">Products</a>
+
+      <ng-container *ngIf="role === 'admin'; else user">
+        <a mat-flat-button color="primary" routerLink="orders">Orders</a>
+      </ng-container>
+
+    </div>
+  </ng-template>
+  <span class="toolbar-spacer"></span>
+  <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    
+  </ng-container>
+  <ng-template #user>
+    <a mat-flat-button color="primary" routerLink="orders/form">Place an Order</a>
+  </ng-template>
+  <ng-template #loggedOut>
+    <button mat-flat-button color="secondary" (click)="handleLogIn()">Log in</button>
+  </ng-template>
+
+</mat-toolbar>
+<mat-menu #userMenu="matMenu">
+  <a mat-menu-item routerLink="profile">Profile</a>
+  <a mat-menu-item (click)="handleLogOut()">Logout</a>
+</mat-menu>
+<router-outlet></router-outlet>

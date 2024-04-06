@@ -1,0 +1,48 @@
+<mat-card>
+    <h1 mat-dialog-title>Filters</h1>
+    <mat-card-content>
+        <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+            <!-- Filters are category, manufacturer, minPrice, maxPrice, quantityInStock -->
+            <mat-form-field appearance="outline">
+                <mat-label>Product Name</mat-label>
+                <input matInput type="text" formControlName="productName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category">
+                    <mat-option value="">Any</mat-option>
+                    <mat-option *ngFor="let c of categories$ | async" [value]="c._id">{{c.categoryName}}</mat-option>
+
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Manufacturer</mat-label>
+                <input matInput type="text" formControlName="manufacturer">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Min Price</mat-label>
+                <input matInput type="number" formControlName="minPrice">
+                <mat-error *ngIf="filterForm.get('minPrice')?.hasError('pattern')">Min Price must be a
+                    <strong>number</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Max Price</mat-label>
+                <input matInput type="number" formControlName="maxPrice">
+
+                <mat-error *ngIf="filterForm.get('maxPrice')?.hasError('pattern')">Max Price must be a
+                    <strong>number</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Minimum Quantity In Stock</mat-label>
+                <input matInput type="number" formControlName="quantity">
+                <mat-error *ngIf="filterForm.get('quantity')?.hasError('pattern')">Quantity must be a
+                    <strong>number</strong></mat-error>
+            </mat-form-field>
+            <div mat-dialog-actions>
+                <button mat-button (click)="onDismiss()" color="warn">Cancel<mat-icon>close</mat-icon></button>
+                <button [disabled]="!hasInput" mat-button color="primary">Apply<mat-icon>check</mat-icon></button>
+            </div>
+        </form>
+        
+    </mat-card-content>
+</mat-card>

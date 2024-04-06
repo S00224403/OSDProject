@@ -1,0 +1,57 @@
+mat-form-field {
+    width: 100%;
+}
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 24px;
+}
+.product-card {
+    display: flex;
+    min-width: 75%;
+    flex-direction: column;
+    border: 1px solid #000000;
+  }
+  
+  .product-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  
+  .detail-line {
+    flex: 1 1 50%; /* Adjust as needed */
+    margin-bottom: 5px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  
+  .action-buttons button {
+    margin-top: 5px;
+  }
+  .add-button {
+    width: auto; /* Adjust width as needed */
+    height: 100%; /* Adjust height as needed */
+    min-height: 12rem;
+    display: inline-flex; /* Ensures the button takes only the necessary space */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .control-buttons {
+    margin-top: 20px; 
+    
+  }
+  
+  .control-buttons a,
+  .control-buttons button {
+    margin-right: 10px; /* Adjust spacing between individual buttons */
+  }
+ 
+  

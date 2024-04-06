@@ -1,0 +1,55 @@
+<div class="container">
+    <a mat-raised-button color="primary" href="/products/form" *ngIf="role === 'admin'">
+        <mat-icon>add</mat-icon>
+        Add New Product
+    </a>
+    <div class="my-1">
+        <button mat-raised-button color="primary" (click)="openFilterDialog()">
+            <mat-icon>filter_list</mat-icon>
+            Filters
+        </button>
+        
+    </div>
+    
+        <mat-form-field appearance="fill" mat-button color="primary">
+            <mat-label>Sort By</mat-label>
+            <mat-select appearance="outline" (selectionChange)="onChange($event.value)" [(ngModel)]="sortSelect">
+                <mat-option value="dateAsc">Default</mat-option>
+                <mat-option value="nameAsc">Name A-Z</mat-option>
+                <mat-option value="nameDesc">Name Z-A</mat-option>
+                <mat-option value="priceAsc">Price Ascending</mat-option>
+                <mat-option value="priceDesc">Price Descending</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+    <div>
+        <button *ngIf="filterSortString != ''" mat-raised-button color="warn"
+            (click)="clearFilters()">
+            <mat-icon>clear_all</mat-icon>
+            Clear Filters
+        </button>
+    </div>
+    <div class="row">
+
+        <div *ngFor='let p of products$ | async' class="col-12 col-sm-6 col-md-4 col-lg-3 my-1">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h2>{{p.productName}}</h2>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h3><strong>Price:</strong> €{{p.price}}</h3>
+                    <h4><strong>Quantity In Stock:</strong> {{p.quantityInStock}}</h4>
+                    <h4><strong>Manufacturer:</strong> {{p.manufacturer}}</h4>
+
+                </mat-card-content>
+                <mat-card-actions>
+                    <a mat-raised-button color="accent" [routerLink]="['/products',p._id]">VIEW DETAILS</a>
+                </mat-card-actions>
+
+
+            </mat-card>
+        </div>
+    </div>
+</div>

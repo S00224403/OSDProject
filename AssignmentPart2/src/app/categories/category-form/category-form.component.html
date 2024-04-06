@@ -1,0 +1,52 @@
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h1 *ngIf="category">Edit Category</h1>
+                <h1 *ngIf="!category">Add Category</h1>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="categoryForm" (ngSubmit) = "onSubmit()"  >
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Category Name</mat-label>
+                    <input matInput formControlName="categoryName">
+                    <mat-icon matSuffix>category</mat-icon>
+                    <mat-error *ngIf="categoryForm.get('categoryName')?.hasError('minlength')">Category Name must be at least <strong>3</strong> characters long</mat-error>
+                    <mat-error *ngIf="categoryForm.get('categoryName')?.hasError('maxlength')">Category Name must be a maximum of <strong>50</strong> characters long</mat-error>
+                    
+                    <mat-error *ngIf="!categoryForm.value.categoryName">Category Name is <strong>required</strong></mat-error>
+                </mat-form-field>
+                
+                
+                
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <input matInput placeholder="Describe the category" formControlName="description">
+                    <mat-icon matSuffix>description</mat-icon>
+                    
+                    <mat-error *ngIf="categoryForm.get('description')?.hasError('minlength')">Description must be at least <strong>10</strong> characters long</mat-error>
+                    <mat-error *ngIf="categoryForm.get('description')?.hasError('maxlength')">Description must be a maximum of <strong>500</strong> characters long</mat-error>
+                    <mat-error *ngIf="!categoryForm.value.description">Description is <strong>required</strong></mat-error>
+                    
+                    
+                    
+                </mat-form-field>
+                
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Image Link</mat-label>
+                    <input matInput placeholder="https://www.image.ie" formControlName="categoryImage">
+                    <mat-icon matSuffix>image</mat-icon>
+                    
+                    <mat-error *ngIf="categoryForm.get('categoryImage')?.hasError('maxlength')">Image must be a maximum of <strong>500</strong> characters long</mat-error>
+                </mat-form-field>
+
+                <a *ngIf="!category" mat-raised-button color="warn" href="/categories">Cancel<mat-icon>close</mat-icon></a>
+                <a *ngIf="category" mat-raised-button color="warn" href="/categories/{{category._id}}">Return<mat-icon>navigate_before</mat-icon></a>
+                <button mat-raised-button type="submit" color="primary" [disabled]="categoryForm.invalid">Submit<mat-icon>check</mat-icon></button>
+            </form> 
+        </mat-card-content>
+    </mat-card>
+</div>

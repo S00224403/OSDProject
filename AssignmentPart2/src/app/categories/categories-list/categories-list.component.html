@@ -1,0 +1,27 @@
+<div class="container my-2">
+    <a mat-raised-button color="primary" href="/categories/form" *ngIf="role === 'admin'">
+        <mat-icon>add</mat-icon>
+        Add New Category
+    </a>
+    <div class="row">
+        <!-- class="responsive-grid" -->
+        <div *ngFor='let c of categories$ | async' class="col-12 col-md-4 col-sm-6 col-lg-3 my-1">
+                <mat-card >
+                    <div class="row">
+                        <div class="col-6 col-md-12 ">
+                            <mat-card-header >
+                                <mat-card-title><h2 >{{c.categoryName}}</h2></mat-card-title>
+                            </mat-card-header>
+                        </div>
+                        <div class="col-6 col-md-12">
+                            <mat-card-actions>
+                                <a mat-raised-button color="accent" [routerLink] = "['/categories',c._id]" >VIEW DETAILS</a>
+                            </mat-card-actions>
+                        </div>
+                    </div>
+                        
+                </mat-card>   
+        </div>
+  </div> 
+</div>
+

@@ -1,0 +1,76 @@
+<div class="container">
+    <mat-card *ngIf="order && !showForm">
+        <mat-card-header>
+            <mat-card-title>
+                <h1>{{order.name}}</h1>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="order-container">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="order-details">
+                        <h2>Order Details</h2>
+
+                        <p><strong>Order Date: </strong>{{ order.orderDate | date: 'dd-MMM-yyyy HH:mm' }}</p>
+                        <p><strong>Email: </strong>{{ order.email }}</p>
+                        <p><strong>Phone number: </strong>{{ order.phone }}</p>
+                        <h2>Address: </h2>
+                        <!-- Access the properties of the first address in the array -->
+                        <ng-container *ngIf="order.address">
+
+                            <p><strong>Address Line: </strong>{{ order.address.addressLine }}</p>
+                            <p><strong>Town: </strong>{{ order.address.town }}</p>
+                            <p><strong>County: </strong>{{ order.address.county }}</p>
+                            <p><strong>Eircode: </strong>{{ order.address.zip }}</p>
+
+                        </ng-container>
+                    </div>
+                </div>
+                
+                <div class="products-ordered col-12 col-md-6">
+                    <!-- Products Column -->
+
+                    <h2>Products Ordered</h2>
+                    <!-- Products content -->
+                    <div>
+                        <mat-card *ngFor="let p of order.products; index as i" class="product-card my-1">
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                   <mat-card-header>
+                                        <h3>{{ productNames[i]}}</h3>
+                                    </mat-card-header> 
+                                </div>
+                                
+                                
+                                <mat-card-content *ngIf="productDetailsVisibility[i]" class="mx-3">
+                                    <p><strong>Quantity Ordered: </strong>{{p.quantity}}</p>
+                                    <p><strong>Price per Item: </strong>{{p.price}}</p>
+                                    <p><strong>Total Item Price: </strong>€ {{p.price * p.quantity | number : '.2-2'}}</p>
+                                </mat-card-content>
+                                <div class="col-md-6 col-12 my-1">
+                                    <button mat-raised-button color="primary" (click)="toggleProductDetails(i)" *ngIf="!productDetailsVisibility[i]" class="my-1 mx-3">View Product Details</button>
+                                    <button mat-raised-button color="primary" (click)="toggleProductDetails(i)" *ngIf="productDetailsVisibility[i]" class="my-1 mx-3">Hide Product Details</button>
+                                </div>
+                            </div>
+                        </mat-card>
+                        <mat-card class="product-card">
+                            <mat-card-content>
+                                <h3>Total Order Price: € {{totalPrice | number : '.2-2'}}</h3>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-raised-button color="primary" href="/orders" class="mx-1">Return<mat-icon>navigate_before</mat-icon></a>
+            <button mat-raised-button color="warn" (click)="deleteOrder()" class="mx-1">Delete<mat-icon>delete</mat-icon></button>
+            <button mat-raised-button color="accent" (click)="editOrder()" class="mx-1">Edit<mat-icon>edit</mat-icon></button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>
+<div *ngIf="showForm">
+    <app-order-form [order]="order"></app-order-form>
+</div>
+<h2>{{message}}</h2>

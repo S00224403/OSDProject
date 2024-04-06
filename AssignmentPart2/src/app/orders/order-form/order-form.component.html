@@ -1,0 +1,162 @@
+<!--  make a form for order-form.component.html -->
+<div class="container">
+    <mat-card class="mt-2">
+        <!-- form for the order fields -->
+        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h2>Order Details</h2>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Order Name</mat-label>
+                        <input matInput type="text" formControlName="name">
+                        <mat-error *ngIf="orderForm.get('name')?.hasError('required')">Order Name is
+                            <strong>required</strong></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email">
+                        <mat-error *ngIf="orderForm.get('email')?.hasError('required')">Customer Email is
+                            <strong>required</strong></mat-error>
+                        <mat-error *ngIf="orderForm.get('email')?.hasError('email')">Customer Email is
+                            <strong>invalid</strong></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <input matInput type="text" formControlName="phone">
+                        <mat-error *ngIf="orderForm.get('phone')?.hasError('required')">Customer Phone is
+                            <strong>required</strong></mat-error>
+                        <mat-error *ngIf="orderForm.get('phone')?.hasError('pattern')">Customer Phone is
+                            <strong>invalid</strong></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>Address</h2>
+                    <div formGroupName="address">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Address Line</mat-label>
+                            <input matInput type="text" formControlName="addressLine">
+                            <mat-error *ngIf="orderForm.get('address.addressLine')?.hasError('required')">Address is
+                                <strong>required</strong></mat-error>
+                            <mat-error *ngIf="orderForm.get('address.addressLine')?.hasError('minlength')">Address must be at
+                                least
+                                <strong>8 characters</strong></mat-error>
+                            <mat-error *ngIf="orderForm.get('address.addressLine')?.hasError('maxlength')">Address must be less
+                                than
+                                <strong>50 characters</strong> </mat-error>
+
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Town</mat-label>
+                            <input matInput type="text" formControlName="town">
+                            <mat-error *ngIf="orderForm.get('address.town')?.hasError('required')">Town is
+                                <strong>required</strong></mat-error>
+                            <mat-error *ngIf="orderForm.get('address.town')?.hasError('minlength')">Town must be at least
+                                <strong>2 characters</strong></mat-error>
+                            <mat-error *ngIf="orderForm.get('address.town')?.hasError('maxlength')">Town must be less than
+                                <strong>50 characters</strong></mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>County</mat-label>
+                            <input matInput type="text" formControlName="county">
+                            <mat-error *ngIf="orderForm.get('address.county')?.hasError('required')">County is
+                                <strong>required</strong></mat-error>
+                            <mat-error *ngIf="orderForm.get('address.county')?.hasError('minlength')">County must be at least
+                                <strong>4 characters</strong></mat-error>
+                            <mat-error *ngIf="orderForm.get('address.county')?.hasError('maxlength')">County must be less than
+                                <strong>50 characters</strong></mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Eircode</mat-label>
+                            <input matInput type="text" formControlName="zip">
+                            <mat-error *ngIf="orderForm.get('address.zip')?.hasError('required')">Eircode is
+                                <strong>required</strong></mat-error>
+                            <mat-error *ngIf="orderForm.get('address.zip')?.hasError('pattern')">Eircode is
+                                <strong>invalid</strong> must be in format <strong>F91 AAAA</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            
+            </div>
+            
+    
+    
+    
+            <h2>Products Ordered</h2>
+            <div>
+                <div>
+                    <div formArrayName="products" class="row">
+                        <div *ngFor="let product of productsFormArray.controls; let i = index"
+                            [formGroupName]="i" class="col-12 col-sm-6 col-md-4 col-lg-3 my-1">
+                            <div class="row">
+                                <div >
+                                    <mat-card class="product-card">
+                                        <mat-card-header>
+                                            <mat-card-title>
+                                                <h3>{{ productNames[i] }}</h3>
+                                            </mat-card-title>
+                                        </mat-card-header>
+                                        <mat-card-content class="product-content">
+                                            <div class="product-details">
+                                                <p class="detail-line">Quantity: {{ product.get('quantity')?.value }}</p>
+                                                <p class="detail-line">Price: €{{ product.get('price')?.value }}</p>
+                                            </div>
+                                            
+                                        </mat-card-content>
+                                            <div class="row">
+                                                <div class="col-12 my-1 mx-3">
+                                                    <button mat-raised-button color="accent" (click)="openFilterDialog(i)"
+                                                        type="button">
+                                                        Edit<mat-icon>edit</mat-icon>
+                                                    </button>
+                                                </div>
+                                                <div class="col-12 my-1 mx-3">
+                                                    <button mat-raised-button color="warn" (click)="removeProduct(i)" type="button">
+                                                        Remove<mat-icon>delete</mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+
+                                        
+                                    </mat-card>
+                                </div>
+                            </div>
+    
+                        </div>
+                        <mat-grid-tile>
+                            <mat-card class="product-card">
+                                <button mat-button color="primary" type="button" (click)="openFilterDialog(-1)"
+                                    class="add-button"><mat-icon>add</mat-icon></button>
+    
+                            </mat-card>
+    
+                        </mat-grid-tile>
+    
+                    </div>
+    
+                </div>
+                <mat-error *ngIf="productsFormArray.hasError('required')">Products are <strong>required</strong></mat-error>
+            </div>
+    
+    
+            <div class="control-buttons">
+                <ng-container *ngIf="(auth.user$ | async);else notLoggedIn">
+                    <a *ngIf="(!order)" mat-raised-button color="warn" href="/orders">Cancel<mat-icon>close</mat-icon></a>
+    
+                    <a *ngIf="order" mat-raised-button color="warn"
+                        href="/orders/{{order._id}}">Return<mat-icon>navigate_before</mat-icon></a>
+                </ng-container>
+                <ng-template #notLoggedIn>
+                    <a mat-raised-button color="warn" href="/">Cancel<mat-icon>close</mat-icon></a>
+                </ng-template>
+                <button mat-raised-button type="submit" color="primary"
+                    [disabled]="orderForm.invalid">Submit<mat-icon>check</mat-icon></button>
+            </div>
+    
+    
+    
+    
+        </form>
+    </mat-card>
+</div>

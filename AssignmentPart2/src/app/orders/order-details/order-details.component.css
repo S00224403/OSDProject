@@ -1,0 +1,32 @@
+/* .order-container {
+    display: flex;
+  } */
+  
+  .order-details,
+  .products-ordered {
+    /* flex: 1;
+    margin-right: 20px; Adjust spacing between sections */
+    padding: 16px;
+  }
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000000;
+  }
+
+  .mat-grid-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* Adjust alignment as needed */
+  }
+  
+  .mat-grid-tile {
+    flex: 1 0 300px; /* Adjust width as needed */
+    margin: 16px;
+    box-sizing: border-box;
+    min-width: 0; /* Ensure content isn't restricted */
+    min-height: 0; /* Ensure content isn't restricted */
+  }
+  
+  

@@ -1,0 +1,44 @@
+<div class="container">
+    <mat-card *ngIf="product && !showForm">
+    <mat-card-header>
+        <mat-card-title>
+            <h1><strong>{{product.productName}}</strong></h1>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div appearance="outline" class="col-md-6 col-12">
+                <img class="image-fluid" mat-card-image [src]="product.productImage" (error)="imageLoadError()"alt="product image">
+            </div>
+                <div class="col-md-6 col-12">
+                <p><strong>Description: </strong>{{product.description}}</p>
+                <p><strong>Price: </strong>€{{product.price}}</p>
+                <p><strong>Quantity In Stock: </strong>{{product.quantityInStock}}</p>
+                <p><strong>Manufacturer: </strong>{{product.manufacturer}}</p>
+
+                <p *ngIf="category$ | async as category"><strong>Category: </strong>{{category.categoryName}}</p>
+            </div>
+        </div>
+        
+        
+
+
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-raised-button color="primary" href="/products" class="mx-1">Return<mat-icon>navigate_before</mat-icon></a>
+        <div *ngIf="role === 'admin'">
+            <button mat-raised-button color="warn" (click)="deleteProduct()" *ngIf="auth.user$ | async" class="mx-1">Delete<mat-icon>delete</mat-icon></button>
+            <button mat-raised-button color="accent" (click)="editProduct()" *ngIf="auth.user$ | async" class="mx-1">Edit<mat-icon>edit</mat-icon></button>
+        </div>
+        
+    </mat-card-actions>
+    <mat-card-footer style="margin-top: 2rem;">
+
+    </mat-card-footer>
+</mat-card>
+</div>
+
+<div *ngIf="showForm">
+    <app-product-form [product]="product"></app-product-form>
+</div>
+<h2>{{message}}</h2>

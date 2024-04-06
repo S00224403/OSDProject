@@ -1,0 +1,102 @@
+<div class="container">
+    <mat-card class="row col-12">
+    <mat-card-header>
+        <mat-card-title>
+            <h1 *ngIf="product">Edit Product</h1>
+            <h1 *ngIf="!product">Add Product</h1>
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Product Name</mat-label>
+                <input matInput formControlName="productName">
+                <mat-icon matSuffix>local_offer</mat-icon>
+                <mat-error *ngIf="productForm.get('productName')?.hasError('minlength')">Product Name must be at least
+                    <strong>3</strong> characters long</mat-error>
+                <mat-error *ngIf="productForm.get('productName')?.hasError('maxlength')">Product Name must be a maximum
+                    of <strong>50</strong> characters long</mat-error>
+
+                <mat-error *ngIf="!productForm.value.productName">Product Name is <strong>required</strong></mat-error>
+            </mat-form-field>
+
+
+
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Describe the product" formControlName="description">
+                <mat-icon matSuffix>description</mat-icon>
+
+                <mat-error *ngIf="productForm.get('description')?.hasError('minlength')">Description must be at least
+                    <strong>10</strong> characters long</mat-error>
+                <mat-error *ngIf="productForm.get('description')?.hasError('maxlength')">Description must be a maximum
+                    of <strong>500</strong> characters long</mat-error>
+                <mat-error *ngIf="!productForm.value.description">Description is <strong>required</strong></mat-error>
+
+
+
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" placeholder="0.00" formControlName="price">
+                <mat-icon matSuffix>attach_money</mat-icon>
+
+                <mat-error *ngIf="productForm.get('price')?.hasError('pattern')">Price must be a number with <strong>2
+                        decimal places max</strong></mat-error>
+                <mat-error *ngIf="productForm.get('price')?.hasError('required')">Price is
+                    <strong>required</strong></mat-error>
+                <mat-error *ngIf="productForm.get('price')?.hasError('min')">Price must be a minimum of
+                    <strong>0.01</strong></mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <input matInput type="number" placeholder="0" formControlName="quantityInStock">
+                <mat-icon matSuffix>shopping_cart</mat-icon>
+
+                <mat-error *ngIf="productForm.get('quantityInStock')?.hasError('pattern')">Quantity must be a
+                    <strong>number</strong></mat-error>
+
+                <mat-error *ngIf="productForm.get('quantityInStock')?.hasError('min')">Quantity must be a minimum of
+                    <strong>0</strong></mat-error>
+                <mat-error *ngIf="!productForm.value.quantityInStock">Quantity is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Manufacturer</mat-label>
+                <input matInput placeholder="Manufacturer" formControlName="manufacturer" value="">
+                <mat-icon matSuffix>business</mat-icon>
+                <mat-error *ngIf="productForm.get('manufacturer')?.hasError('maxlength')">Manufacturer must be max
+                    <strong>50</strong> characters long</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Image Link</mat-label>
+                <input matInput placeholder="https://www.image.ie" formControlName="productImage">
+                <mat-icon matSuffix>image</mat-icon>
+
+                <mat-error *ngIf="productForm.get('productImage')?.hasError('maxlength')">Image must be a maximum of
+                    <strong>500</strong> characters long</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category">
+                    <div>
+                        <mat-option *ngFor="let c of categories$ | async"
+                            [value]="c._id">{{c.categoryName}}</mat-option>
+                    </div>
+                </mat-select>
+                <mat-icon matSuffix>category</mat-icon>
+
+                <mat-error *ngIf="!productForm.value.category">Category is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <a *ngIf="!product" mat-raised-button color="warn" href="/products">Cancel<mat-icon>close</mat-icon></a>
+            <a *ngIf="product" mat-raised-button color="warn" href="/products/{{product._id}}">Return<mat-icon>navigate_before</mat-icon></a>
+            <button mat-raised-button type="submit" color="primary" [disabled]="productForm.invalid">Submit<mat-icon>check</mat-icon></button>
+        </form>
+    </mat-card-content>
+</mat-card>
+</div>
