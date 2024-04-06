@@ -27,10 +27,12 @@ export class OrderDetailsComponent {
   totalPrice: number = 0;
   productNames: string[] = [];
   productDetailsVisibility: boolean[] = [];
+  role!: string;
   cols: number = 1;//number of columns for grid list
   constructor(private route: ActivatedRoute, private productService: ProductService, 
     private router: Router, public dialog: MatDialog, private snackBar: MatSnackBar,
     private orderService: OrderService, private breakpointObserver: BreakpointObserver) { 
+      this.role = localStorage.getItem('role') || '';
       //get order id from route
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {

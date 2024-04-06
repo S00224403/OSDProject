@@ -9,7 +9,7 @@ import { AdminGuard } from '../admin.guard';
 const routes: Routes = [
   { path: 'orders', component: OrderListComponent, canActivate: [AdminGuard] },
   { path: 'orders/form', component: OrderFormComponent },
-  { path: 'orders/:id', component: OrderDetailsComponent, canActivate: [AdminGuard] },
+  { path: 'orders/:id', component: OrderDetailsComponent },
  
   
 ];
