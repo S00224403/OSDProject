@@ -25,7 +25,7 @@
 
     </mat-card-content>
     <mat-card-actions>
-        <a mat-raised-button color="primary" routerLink="products" class="mx-1">Return<mat-icon>navigate_before</mat-icon></a>
+        <a mat-raised-button color="primary" routerLink="../" class="mx-1">Return<mat-icon>navigate_before</mat-icon></a>
         <div *ngIf="role === 'admin'">
             <button mat-raised-button color="warn" (click)="deleteProduct()" *ngIf="auth.user$ | async" class="mx-1">Delete<mat-icon>delete</mat-icon></button>
             <button mat-raised-button color="accent" (click)="editProduct()" *ngIf="auth.user$ | async" class="mx-1">Edit<mat-icon>edit</mat-icon></button>
